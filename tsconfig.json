@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "composite": true,
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "lib": [
+      "ES2016",
+      "ES2017",
+      "DOM"
+    ],
+    "declaration": true,
+    "module": "commonjs",
+    "strict": true, 
+    "target": "ES2015"
+  },
+  "include": [
+    "./src/**/*.ts",
+  ]
+}
