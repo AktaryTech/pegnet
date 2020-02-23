@@ -1,6 +1,6 @@
 [![https://nodei.co/npm/pegnet.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/pegnet.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/pegnet)
 
-[![Node version](https://img.shields.io/node/v/[pegnet].svg?style=flat)](http://nodejs.org/download/)
+[![Node version](https://img.shields.io/node/v/pegnet.svg?style=flat)](http://nodejs.org/download/)
 
 # PEGNET
 
