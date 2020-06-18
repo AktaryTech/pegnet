@@ -1,16 +1,17 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Pegnet } from './pegnet';
-import { ISyncStatus, ITransaction, IIssuance, IBalances, IRates, ITransactions, ITransactionStatus } from 'pegnet';
+import { ISyncStatus, ITransaction, IIssuance, IBalances, IRates, ITransactionStatus } from 'pegnet';
 
 const config = {
-  pegnetd: 'https://api.pegnetd.com',
   pegnetChain: 'cffce0f409ebba4ed236d49d89c70e4bd1f1367d86402a3363366683265a242d',
 };
 
 const pegnet = new Pegnet(config);
 
 describe('Getters', () => {
+
+  // Generic read tests
   describe('#getSyncStatus()', () => {
     let response: ISyncStatus;
     before(async () => {
@@ -22,23 +23,6 @@ describe('Getters', () => {
     it('should get factomheight', () => {
       expect(response, 'status[factomheight]').to.have.property('factomheight');
     });
-  });
-  
-
-  describe('#getTransaction()', () => {
-    const txn = '00-c99dedea0e4e0c40118fe7e4d515b23cc0489269c8cef187b4f15a4ccbd880be';
-    let response: ITransaction;
-    before(async () => {
-      response = await pegnet.getTransaction(txn);
-    });
-    it('should have a count equal to 1', () => {
-      expect(response, 'transaction[count]').to.have.property('count');
-      expect(response.count, 'transaction[count]').to.equal(1);
-    });
-    it('should have an actions array of length 1', () => {
-      expect(response, 'transaction[actions]').to.have.property('actions');
-      expect(response.actions, 'transaction[actions]').to.have.length(1);
-     });
   });
 
   describe('#getPegnetIssuance()', () => {
@@ -57,18 +41,6 @@ describe('Getters', () => {
     });
   });
 
-  describe('#getPegnetBalances()', () => {
-    let response: IBalances;
-    before(async () => {
-      response = await pegnet.getPegnetBalances('FA28MV2VvvsdjjgXoHwsadtMWqM5mt7bZU3hMjLuDLLN1DBhK48g');
-    });
-    
-    it('should have a PEG balance', () => {
-      expect(response, 'balances').to.have.property('PEG');
-      expect(response.PEG, 'balances[PEG]').to.be.a('number');
-    });
-  });
-
   describe('#getPegnetRates()', () => {
     let response: IRates;
     before(async () => {
@@ -81,6 +53,21 @@ describe('Getters', () => {
     });
   });
 
+
+  // Account-specific reads
+  describe('#getPegnetBalances()', () => {
+    let response: IBalances;
+    before(async () => {
+      response = await pegnet.getPegnetBalances('FA28MV2VvvsdjjgXoHwsadtMWqM5mt7bZU3hMjLuDLLN1DBhK48g');
+    });
+    
+    it('should have a PEG balance', () => {
+      expect(response, 'balances').to.have.property('PEG');
+      expect(response.PEG, 'balances[PEG]').to.be.a('number');
+    });
+  });
+
+  // transaction-specific tests
   describe('#getTransactionStatus()', () => {
     const txn = 'a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0';
     let response: ITransactionStatus;
@@ -98,6 +85,23 @@ describe('Getters', () => {
     });
   });
 
+  describe('#getTransaction()', () => {
+    const txn = '00-64bdda388e7957d038fe01696f67125230bae750506866aa801894ecac3c86bf';
+    let response: ITransaction;
+    before(async () => {
+      response = await pegnet.getTransaction(txn);
+    });
+    it('should have a count equal to 1', () => {
+      expect(response, 'transaction[count]').to.have.property('count');
+      expect(response.count, 'transaction[count]').to.equal(1);
+    });
+    it('should have an actions array of length 1', () => {
+      expect(response, 'transaction[actions]').to.have.property('actions');
+      expect(response.actions, 'transaction[actions]').to.have.length(1);
+     });
+  });
+
+  // Account and transaction specific
   describe('#getTransactions()', () => {
     it('should get transactions, given an entryHash',  async () => {
       const entryHash = 'a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0';
@@ -121,5 +125,4 @@ describe('Getters', () => {
       expect(response.actions).to.have.lengthOf.at.most(50);
     });
   });
-
 });

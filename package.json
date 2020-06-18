@@ -1,6 +1,6 @@
 {
   "name": "pegnet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/pegnet.js",
   "license": "MIT",
   "author": {
@@ -22,7 +22,7 @@
     "build": "tsc",
     "build:clean": "yarn clean && yarn build",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "fds:start": "factom-dev-stack start && open -a \"Google Chrome\" http://localhost:8090",
+    "fds:start": "factom-dev-stack start && open -a \"Google Chrome\" http://localhost:8080",
     "fds:stop": "factom-dev-stack stop",
     "fds:wrap": "factom-dev-stack wrap",
     "test": "yarn build && mocha dist/*.test.js",

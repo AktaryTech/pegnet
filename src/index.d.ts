@@ -15,7 +15,7 @@ declare module 'pegnet' {
     createBatch(req: [IConversion | ITransfer]) : IBatch;
   }
   export interface IConfig {
-    pegnetd: string;  // instance of pegnetd
+    pegnetd?: string;  // instance of pegnetd
     server?: string;  // instance of factom
     wallet?: string;  // instance of factom-wallet
     walletUser?: string;  // wallet username

@@ -6,6 +6,8 @@
 
 Typescript-based library for interacting with the Pegnet stablecoin network in Node.js.
 
+*This library is not (currently) for [mining](https://github.com/pegnet/PegNet/wiki/Mining).*
+
 ## Installation
 ```
 yarn add pegnet
@@ -28,13 +30,13 @@ const pegnet = new Pegnet(config);
 ```
 
 ### Configuration
-By default, this package will connect to the publicly-hosted pNode for Pegnet queries.
+By default, this package will connect to the publicly-hosted (pNode)[www.pegnetd.com] for Pegnet queries. You can alternatively choose to install and use a locally-running (pegnetd)[https://github.com/pegnet/pegnetd].
 
 These values can be set by passing a config object when instantiating:
 
-    pegnetd: string;  // instance of pegnetd
-    server?: string;  // instance of factom
-    wallet?: string;  // instance of factom-wallet
+    pegnetd?: string;  // instance of pegnetd. Defaults to pegnetd.com.
+    server?: string;  // instance of factom.  Defaults to localhost.
+    wallet?: string;  // instance of factom-wallet.  Defaults to localhost.
     walletUser?: string;  // wallet username
     walletPass?: string;  // wallet password
     pegnetChain?: string;  // hash of pegnet chain on the factom server specified above
@@ -45,6 +47,7 @@ The names of the functions are simply camel case versions of those specified by 
 
 ## Important links
 Specific to Pegnet and `pegnetd`
+- https://github.com/pegnet/pegnetd
 - https://pegnetd.com
 - https://github.com/pegnet/pegnetd/wiki
 
@@ -53,6 +56,7 @@ For creating pegnet transactions
 - https://docs.factomprotocol.org/start/hello-world-examples/javascript
 - https://github.com/PaulBernier/factom-dev-stack
 - https://hackmd.io/EfSzduXqQ8yyD9vBYK3E-w?view
+- https://github.com/pegnet/pegnet/blob/develop/Docker.md
 
 
 ## Contributing
@@ -63,9 +67,3 @@ Contributors and pull requests are welcome.
 
 `yarn test:all` compiles Typescript files, starts local factom, runs mocha tests.  For reading data and writing transactions.
 
-## Donations
-FCT: FA2GkH2DH6m8cdoPQyWBtoNdwr1qAV9vERVYVQjcXaGmrxTRbpjw
-
-ETH: 0x44E0117d895375479773A1f1F60B952110F25a0a
-
-BTC: bc1qn89rkcz7j4gtt3he2hm5dkxvz286we5mmw0tjs
