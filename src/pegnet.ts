@@ -1,5 +1,5 @@
 import { JSONRPCClient, JSONRPCRequest, JSONRPCResponse } from "json-rpc-2.0";
-import { IPegnet, IConfig, IGetTransactions, ITransaction, IGetRichList, ITransfer, IConversion, ITransactionInput } from 'pegnet';
+import { IPegnet, IConfig, IGetTransactions, ITransaction, IGetRichList, ITransfer, IConversion, ITransactionInput, IBalances } from 'pegnet';
 import { FactomCli } from 'factom';
 import fetch from 'node-fetch';
 
@@ -8,20 +8,20 @@ export class Pegnet implements IPegnet{
   private pegnetChain: string;
   private cli: FactomCli;
 
-  constructor(config: IConfig) {
-    this.pegnetd = config.pegnetd || "https://api.pegnetd.com";
-    this.pegnetChain = config.pegnetChain || "cffce0f409ebba4ed236d49d89c70e4bd1f1367d86402a3363366683265a242d";
+  constructor(config?: IConfig) {
+    this.pegnetd = config?.pegnetd || "https://api.pegnetd.com";
+    this.pegnetChain = config?.pegnetChain || "cffce0f409ebba4ed236d49d89c70e4bd1f1367d86402a3363366683265a242d";
 
     this.cli = new FactomCli({
         factomd: {
-            host: config.server || "localhost",
-            port: config.server ? 443 : 8088,
-            protocol: config.server ? 'https' : 'http'
+            host: config?.server || "localhost",
+            port: config?.server ? 443 : 8088,
+            protocol: config?.server ? 'https' : 'http'
         },
         walletd: {
-            host: config.wallet || 'localhost',
-            user: config.walletUser || "",
-            password: config.walletPass || ""
+            host: config?.wallet || 'localhost',
+            user: config?.walletUser || "",
+            password: config?.walletPass || ""
         }
     })
   }
@@ -130,7 +130,7 @@ export class Pegnet implements IPegnet{
 
   public createBatch = (request: [IConversion | ITransfer]) => {
     if(!request || request.length < 1) {
-      throw new Error(`Batches must have at least one transation`);
+      throw new Error(`Batches must have at least one transaction`);
     }
     return({
       version: 1,
