@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { Pegnet } from './pegnet';
-import { ISyncStatus, ITransaction, IIssuance, IBalances, IRates, ITransactionStatus } from 'pegnet';
+import { ISyncStatus, ITransaction, IIssuance, IBalances, IRates, ITransactionStatus, Pegnet } from './pegnet';
 
 const config = {
   pegnetChain: 'cffce0f409ebba4ed236d49d89c70e4bd1f1367d86402a3363366683265a242d',
